@@ -16,7 +16,9 @@ exports.seed = async (knex) => {
     "Cool Cat",
     23,
     "Female",
-    "NYC"
+    "NYC",
+    "Male",
+    "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
   );
   await User.create(
     "l33t-guy",
@@ -25,7 +27,8 @@ exports.seed = async (knex) => {
     "Leet Guy",
     19,
     "Male",
-    "SLC"
+    "SLC",
+    "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
   );
   await User.create(
     "wowow",
@@ -34,6 +37,7 @@ exports.seed = async (knex) => {
     "Wow Wow",
     29,
     "Male",
-    "Portland"
+    "Portland",
+    "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D"
   );
 };

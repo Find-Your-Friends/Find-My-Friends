@@ -12,6 +12,7 @@ exports.up = (knex) => {
     table.integer("age").notNullable();
     table.string("gender").notNullable();
     table.string("location").notNullable();
+    table.string("profile_pic").notNullable()
     table.timestamps(true, true);
   });
 };

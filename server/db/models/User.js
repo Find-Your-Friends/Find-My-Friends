@@ -17,6 +17,7 @@ class User {
     age,
     gender,
     location,
+    profile_pic,
   }) {
     this.id = id;
     this.username = username;
@@ -26,6 +27,7 @@ class User {
     this.age = age;
     this.gender = gender;
     this.location = location;
+    this.profile_pic = profile_pic;
   }
 
   // This instance method takes in a plain-text password and returns true if it matches
@@ -61,13 +63,14 @@ class User {
     full_name,
     age,
     gender,
-    location
+    location,
+    profile_pic
   ) {
     // hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await authUtils.hashPassword(password);
 
-    const query = `INSERT INTO users (username, password_hash, email, full_name, age, gender, location)
-      VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING *`;
+    const query = `INSERT INTO users (username, password_hash, email, full_name, age, gender, location, profile_pic)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       username,
       passwordHash,
@@ -76,6 +79,7 @@ class User {
       age,
       gender,
       location,
+      profile_pic,
     ]);
     const user = rows[0];
     return new User(user);
