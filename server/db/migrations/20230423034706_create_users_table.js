@@ -9,10 +9,10 @@ exports.up = (knex) => {
     table.string("password_hash").notNullable();
     table.string("email").notNullable();
     table.string("full_name").notNullable();
-    table.integer("age").notNullable();
-    table.string("gender").notNullable();
-    table.string("location").notNullable();
-    table.string("profile_pic").notNullable()
+    table.integer("age");
+    table.string("gender");
+    table.string("location");
+    table.string("profile_pic");
     table.timestamps(true, true);
   });
 };
