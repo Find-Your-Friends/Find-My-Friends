@@ -8,12 +8,24 @@ class User {
   // Instead, it is used by each of the User static methods to hide the hashed
   // password of users before sending user data to the client. Since #passwordHash
   // is private, only the isValidPassword instance method can access that value.
-  constructor({ id, username, password_hash, email, full_name }) {
+  constructor({
+    id,
+    username,
+    password_hash,
+    email,
+    full_name,
+    age,
+    gender,
+    location,
+  }) {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
     this.email = email;
     this.full_name = full_name;
+    this.age = age;
+    this.gender = gender;
+    this.location = location;
   }
 
   // This instance method takes in a plain-text password and returns true if it matches
@@ -42,17 +54,28 @@ class User {
     return user ? new User(user) : null;
   }
 
-  static async create(username, password, email, full_name) {
+  static async create(
+    username,
+    password,
+    email,
+    full_name,
+    age,
+    gender,
+    location
+  ) {
     // hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await authUtils.hashPassword(password);
 
-    const query = `INSERT INTO users (username, password_hash, email, full_name)
-      VALUES (?, ?, ?, ?) RETURNING *`;
+    const query = `INSERT INTO users (username, password_hash, email, full_name, age, gender, location)
+      VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       username,
       passwordHash,
       email,
       full_name,
+      age,
+      gender,
+      location,
     ]);
     const user = rows[0];
     return new User(user);

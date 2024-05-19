@@ -9,6 +9,9 @@ exports.up = (knex) => {
     table.string("password_hash").notNullable();
     table.string("email").notNullable();
     table.string("full_name").notNullable();
+    table.integer("age").notNullable();
+    table.string("gender").notNullable();
+    table.string("location").notNullable();
     table.timestamps(true, true);
   });
 };
