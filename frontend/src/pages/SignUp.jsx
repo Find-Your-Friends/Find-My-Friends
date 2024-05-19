@@ -26,8 +26,7 @@ export default function SignUpPage() {
       username, 
       password, 
       email, 
-      fullName, 
-      passwordConfirm });
+      fullName});
       
       setCurrentUser(user);
       if (error) return setErrorText(error.message);
