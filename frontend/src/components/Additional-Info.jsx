@@ -22,10 +22,8 @@ const handleSubmit = async (event) => {
       const [user, error] = await updateUserInfo({
         id: currentUser.id,
         location,
-        sex,
+        gender,
         age,
-        status,
-        aboutMe,
       });
       setCurrentUser(user);
     
@@ -34,7 +32,12 @@ const handleSubmit = async (event) => {
     }
     return (
         <div>
-           <Input>hahah</Input> 
+            <form action="">
+                <Input label="Input With Icon" icon={<i className="fas fa-heart" />} />
+                <Input label="Input With Icon" icon={<i className="fas fa-heart" />} />
+                <Input label="Input With Icon" icon={<i className="fas fa-heart" />} />
+            </form>
+
         </div>
     )
 }

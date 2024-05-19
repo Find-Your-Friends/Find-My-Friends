@@ -62,13 +62,13 @@ style={{ backgroundImage: `url(${placeholder1})` }}
             <form onSubmit={handleSubmit} aria-labelledby="login-heading">
               <div className="mb-4">
                 <Input
-                  type="email"
+                  type="username"
                   color="primary"
                   size="lg"
-                  autoComplete="email"
-                  id="email"
-                  name="email"
-                  label="Email Address"
+                  // autoComplete="email"
+                  id="username"
+                  name="username"
+                  label="username"
                 />
               </div>
               <div className="mb-4">
