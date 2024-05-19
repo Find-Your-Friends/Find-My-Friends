@@ -1,6 +1,12 @@
+import { useContext } from "react";
+import { useNavigate, Navigate, Link } from "react-router-dom";
+import CurrentUserContext from "../contexts/current-user-context";
+
 export default function HomePage() {
+
+  const {currentUser, setCurrentUser} = useContext(CurrentUserContext)
+
+  if (!currentUser)  return <Navigate to="/landing" />;
   return <>
-    <h1>Home</h1>
-    <p>Put something interesting here!</p>
   </>;
 }

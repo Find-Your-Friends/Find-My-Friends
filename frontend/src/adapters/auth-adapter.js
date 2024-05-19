@@ -16,3 +16,9 @@ export const logUserOut = async () => {
   await fetchHandler(`${baseUrl}/logout`, deleteOptions);
   return true;
 };
+
+//add a terminate feature
+export const deleteUser = async () => {
+  await fetchHandler(`${baseUrl}/users/delete`, deleteOptions);
+  return true;
+};

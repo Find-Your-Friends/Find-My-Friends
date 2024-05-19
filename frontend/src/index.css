@@ -1,4 +1,4 @@
-body {
+/* body {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   margin: 0;
 }
@@ -46,9 +46,13 @@ form {
   margin: 1rem auto;
 }
 
-/* automatically added by NavLink component */
+/* automatically added by NavLink component 
 .active {
   color: #EEBC32;
   font-weight: bold;
   font-style: italic;
-}
+} */
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
