@@ -15,34 +15,34 @@ export const getAllUsers = async () => {
 
 export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
-export const updateUsername = async ({ id, username }) => (
-  fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username }))
-);
+// export const updateUsername = async ({ id, username }) => (
+//   fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username }))
+// );
 
-// export const updateUserInfo = async ({
-//   id,
-//   username,
-//   fullName,
-//   email,
-//   password,
-//   location,
-//   gender,
-//   age,
-//   profile_image
-// }) =>
-//   fetchHandler(
-//     `${baseUrl}/${id}`,
-//     getPatchOptions({
-//       username,
-//       fullName,
-//       email,
-//       password,
-//       location,
-//       gender,
-//       age,
-//       profile_image
-//     })
-//   );
+export const updateUserInfo = async ({
+  id,
+  username,
+  fullName,
+  email,
+  password,
+  location,
+  gender,
+  age,
+  profile_image
+}) =>
+  fetchHandler(
+    `${baseUrl}/${id}`,
+    getPatchOptions({
+      username,
+      fullName,
+      email,
+      password,
+      location,
+      gender,
+      age,
+      profile_image
+    })
+  );
 
 // export const updatePassword= async ({ id, username, password }) => (
 //   fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username, password }))
