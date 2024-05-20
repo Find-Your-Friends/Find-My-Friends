@@ -60,12 +60,20 @@ class User {
     username,
     password,
     email,
-    full_name,
-    age,
-    gender,
-    location,
-    profile_pic
+    full_name = '',
+    age = null,
+    gender = null,
+    location = null,
+    profile_pic = null
   ) {
+
+      // Logging the parameters to verify their values
+  console.log('Parameters:', { username, password, email, full_name, age, gender, location, profile_pic });
+
+  // Ensureing all required parameters are provided
+  if (!username || !password || !email) {
+    throw new Error('Missing required fields: username, password or email');
+  }
     // hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await authUtils.hashPassword(password);
 
