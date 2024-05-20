@@ -32,7 +32,7 @@ const handleSubmit = async (event) => {
     }
     return (
         <div>
-            <form >
+            <form onSumbit={handleSubmit}>
                 <div className="w-72">
                     <Input label="Input With Icon" icon={<i className="fas fa-heart" />} />
                     <Input label="Input With Icon" icon={<i className="fas fa-heart" />} />
