@@ -17,8 +17,7 @@ export const AdditionalInfo = () => {
 const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
-
-        
+    
       const [user, error] = await updateUserInfo({
         id: currentUser.id,
         location,
@@ -30,14 +29,18 @@ const handleSubmit = async (event) => {
       if (error) return setError(error.statusText);
       navigate("/");
     }
+
+    const  handleChange = (event) => {
+		const { name , value } = event.target
+    };
     return (
         <div>
             <form onSumbit={handleSubmit}>
                 <div className="w-72">
-                    <Input label="Input With Icon" icon={<i className="fas fa-heart" />} />
-                    <Input label="Input With Icon" icon={<i className="fas fa-heart" />} />
-                    <Input label="Input With Icon" icon={<i className="fas fa-heart" />} />
-                    <Input label="Input With Icon" icon={<i className="fas fa-heart" />} />
+                    <Input label="Input With Icon" name="" value = {location} onChange={(e) => setLocation(e.target.value)} icon={<i className="fas fa-heart" />} />
+                    <Input label="Input With Icon" value = {gender} onChange={(e) => setAge(e.target.value)} icon={<i className="fas fa-heart" />} />
+                    <Input label="Input With Icon" value = {age} onChange={(e) => setAge(e.target.value)} icon={<i className="fas fa-heart" />} />
+                    {/* <Input label="Input With Icon" value = {} icon={<i className="fas fa-heart" />} /> */}
                 </div>
             </form>
 

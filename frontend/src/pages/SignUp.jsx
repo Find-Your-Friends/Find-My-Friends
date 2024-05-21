@@ -25,7 +25,7 @@ export default function SignUpPage() {
 
     if (password !== passwordConfirm) setErrorText("Passwords do not match");
 
-      const [user, error] = await createUser({ username, password, email, fullName, profile_pic:'../images/placeholder1.jpeg'});
+      const [user, error] = await createUser({ username, password, email, fullName:fullName, profile_pic:'../images/placeholder1.jpeg'});
 
       
       setCurrentUser(user);
