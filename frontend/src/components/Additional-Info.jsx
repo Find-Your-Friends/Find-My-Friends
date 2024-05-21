@@ -32,14 +32,17 @@ const handleSubmit = async (event) => {
 
     const  handleChange = (event) => {
 		const { name , value } = event.target
+        if (name === "location")setLocation(value)
+        if (name === "gender")setGender(value)
+        if (name === "age")setAge(value)
     };
     return (
         <div>
             <form onSumbit={handleSubmit}>
                 <div className="w-72">
-                    <Input label="Input With Icon" name="" value = {location} onChange={(e) => setLocation(e.target.value)} icon={<i className="fas fa-heart" />} />
-                    <Input label="Input With Icon" value = {gender} onChange={(e) => setAge(e.target.value)} icon={<i className="fas fa-heart" />} />
-                    <Input label="Input With Icon" value = {age} onChange={(e) => setAge(e.target.value)} icon={<i className="fas fa-heart" />} />
+                    <Input label="Input With Icon" name="location" value = {location} onChange={handleChange} icon={<i className="fas fa-heart" />} />
+                    <Input label="Input With Icon" name="gender" value = {gender} onChange={handleChange} icon={<i className="fas fa-heart" />} />
+                    <Input label="Input With Icon" name="age" value = {age} onChange={handleChange} icon={<i className="fas fa-heart" />} />
                     <Button type="submit" color="primary" size="lg" fullWidth>Submit</Button>
                     {/* <Input label="Input With Icon" value = {} icon={<i className="fas fa-heart" />} /> */}
                 </div>
