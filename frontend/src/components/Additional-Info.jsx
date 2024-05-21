@@ -2,7 +2,7 @@ import React, { useState, useContext } from "react";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { updateUserInfo } from "../adapters/user-adapter";
-import { Input } from "@material-tailwind/react";
+import { Input, Button} from "@material-tailwind/react";
 
 export const AdditionalInfo = () => {
     const { currentUser, setCurrentUser, accountType } = useContext(CurrentUserContext);
@@ -40,6 +40,7 @@ const handleSubmit = async (event) => {
                     <Input label="Input With Icon" name="" value = {location} onChange={(e) => setLocation(e.target.value)} icon={<i className="fas fa-heart" />} />
                     <Input label="Input With Icon" value = {gender} onChange={(e) => setAge(e.target.value)} icon={<i className="fas fa-heart" />} />
                     <Input label="Input With Icon" value = {age} onChange={(e) => setAge(e.target.value)} icon={<i className="fas fa-heart" />} />
+                    <Button type="submit" color="primary" size="lg" fullWidth>Submit</Button>
                     {/* <Input label="Input With Icon" value = {} icon={<i className="fas fa-heart" />} /> */}
                 </div>
             </form>
