@@ -60,20 +60,28 @@ class User {
     username,
     password,
     email,
-    full_name = '',
+    full_name = "",
     age = null,
     gender = null,
     location = null,
     profile_pic = null
   ) {
+    // Logging the parameters to verify their values
+    console.log("Parameters:", {
+      username,
+      password,
+      email,
+      full_name,
+      age,
+      gender,
+      location,
+      profile_pic,
+    });
 
-      // Logging the parameters to verify their values
-  console.log('Parameters:', { username, password, email, full_name, age, gender, location, profile_pic });
-
-  // Ensureing all required parameters are provided
-  if (!username || !password || !email) {
-    throw new Error('Missing required fields: username, password or email');
-  }
+    // Ensureing all required parameters are provided
+    if (!username || !password || !email) {
+      throw new Error("Missing required fields: username, password or email");
+    }
     // hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await authUtils.hashPassword(password);
 
@@ -103,6 +111,30 @@ class User {
       RETURNING *
     `;
     const { rows } = await knex.raw(query, [username, id]);
+    const updatedUser = rows[0];
+    return updatedUser ? new User(updatedUser) : null;
+  }
+  static async updateAdditionalInfomation(
+    id,
+    age,
+    gender,
+    location,
+    profile_pic
+  ) {
+    // dynamic queries are easier if you add more properties
+    const query = `
+      UPDATE users
+      SET age = ?, gender = ?, location = ?, profile_pic = ?
+      WHERE id=?
+      RETURNING *
+    `;
+    const { rows } = await knex.raw(query, [
+      age,
+      gender,
+      location,
+      profile_pic,
+      id,
+    ]);
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
   }
