@@ -114,64 +114,126 @@ class User {
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
   }
-//   static async updateAdditionalInfomation(
-//     id,
-//     age = null,
-//     gender = null,
-//     location = null,
-//     profile_pic = null
-//   ) {
-//     // dynamic queries are easier if you add more properties
-//     const query = `
-//       UPDATE users
-//       SET age = ?, gender = ?, location = ?, profile_pic = ?
-//       WHERE id=?
-//       RETURNING *
-//     `;
-//     const { rows } = await knex.raw(query, [
-//       age,
-//       gender,
-//       location,
-//       profile_pic,
-//       id,
-//     ]);
-//     const updatedUser = rows[0];
-//     return updatedUser ? new User(updatedUser) : null;
+  // static async updateAdditionalInfomation(
+  //   id,
+  //   age = null,
+  //   gender = null,
+  //   location = null,
+  //   profile_pic = null
+  // ) {
+  //   // dynamic queries are easier if you add more properties
+  //   const query = `
+  //     UPDATE users
+  //     SET age = ?, gender = ?, location = ?, profile_pic = ?
+  //     WHERE id=?
+  //     RETURNING *
+  //   `;
+  //   const { rows } = await knex.raw(query, [
+  //     age,
+  //     gender,
+  //     location,
+  //     profile_pic,
+  //     id,
+  //   ]);
+  //   const updatedUser = rows[0];
+  //   return updatedUser ? new User(updatedUser) : null;
+  // }
+  // update = async ({
+  //   username,
+  //   password,
+  //   full_name,
+  //   email,
+  //   location,
+  //   age,
+  //   profile_pic,
+  //   gender
+  // }) => {
+  //   try {
+  //     const passwordHash = await hashPassword(password);
+  //     const [updatedUser] = await knex("users")
+  //       .where({ id: this.id })
+  //       .update({
+  //         username,
+  //         password: passwordHash,
+  //         full_name,
+  //         email,
+  //         location,
+  //         age,
+  //         profile_pic,
+  //         gender
+  //       })
+  //       .returning("*");
+  //     return updatedUser ? new User(updatedUser) : null;
+  //   } catch (err) {
+  //     console.error(err);
+  //     return null;
+  //   }
+  // };
+// static async updateAdditionalInfo(
+//   id,
+//   age = null,
+//   gender = null,
+//   location = null,
+//   profile_pic = null
+// ) {
+//   const fields = { age, gender, location, profile_pic };
+//   const updates = [];
+//   const values = [];
+
+//   for (const [key, value] of Object.entries(fields)) {
+//     if (value !== null) {
+//       updates.push(`${key} = ?`);
+//       values.push(value);
+//     }
 //   }
 
-static async updateAdditionalInfo(
-  id,
-  age = null,
-  gender = null,
-  location = null,
-  profile_pic = null
-) {
-  const fields = { age, gender, location, profile_pic };
-  const updates = [];
-  const values = [];
+//   if (updates.length === 0) {
+//     throw new Error('No valid fields to update');
+//   }
 
-  for (const [key, value] of Object.entries(fields)) {
-    if (value !== null) {
-      updates.push(`${key} = ?`);
-      values.push(value);
-    }
+//   values.push(id);
+
+//   const query = `
+//     UPDATE users
+//     SET ${updates.join(', ')}
+//     WHERE id = ?
+//     RETURNING *
+//   `;
+//   const { rows } = await knex.raw(query, values);
+//   const updatedUser = rows[0];
+//   return updatedUser ? new User(updatedUser) : null;
+// }
+
+static async updateAdditionalInfo(id, age, gender, location, profile_pic) {
+  // Ensure that ID is valid
+  if (!id) {
+    throw new Error('User ID is required for updating information.');
   }
 
-  if (updates.length === 0) {
-    throw new Error('No valid fields to update');
+  // Prepare an object to store the fields to update
+  const fieldsToUpdate = {};
+  if (age !== null && age !== undefined) fieldsToUpdate.age = age;
+  if (gender !== null && gender !== undefined) fieldsToUpdate.gender = gender;
+  if (location !== null && location !== undefined) fieldsToUpdate.location = location;
+  if (profile_pic !== null && profile_pic !== undefined) fieldsToUpdate.profile_pic = profile_pic;
+
+  // If no fields to update, return without making a database call
+  if (Object.keys(fieldsToUpdate).length === 0) {
+    throw new Error('No fields provided for update.');
   }
 
-  values.push(id);
+  try {
+    // Use knex to build the update query dynamically
+    const [updatedUser] = await knex('users')
+      .where({ id })
+      .update(fieldsToUpdate)
+      .returning('*');
 
-  const query = `
-    UPDATE users
-    SET ${updates.join(', ')}
-    WHERE id = ?
-    RETURNING *
-  `;
-  const { rows } = await knex.raw(query, values);
-  const updatedUser = rows[0];
-  return updatedUser ? new User(updatedUser) : null;
+    return updatedUser ? new User(updatedUser) : null;
+  } catch (error) {
+    console.error('Error updating user:', error);
+    throw error;
+  }
 }
 
 static async deleteAll() {
