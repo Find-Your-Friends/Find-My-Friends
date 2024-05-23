@@ -60,7 +60,7 @@ class User {
     username,
     password,
     email,
-    full_name = "",  
+    full_name = "No Name Provided",  
     age = null,
     gender = null,
     location = null,

@@ -25,7 +25,7 @@ export default function SignUpPage() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorText('');
-    if (!username || !password || !email || !passwordConfirm || !fullName) return setErrorText('Missing Input fields');
+    if (!username || !password || !email || !passwordConfirm || !full_name) return setErrorText('Missing Input fields');
 
     const [user, error] = await createUser({
       username,
@@ -34,6 +34,15 @@ export default function SignUpPage() {
       full_name : full_name === ""? null:full_name,
       profile_pic: "../images/placeholder1.jpeg",
     });
+    //req payload
+    console.log("Request Payload:", {
+      username,
+      password,
+      email,
+      full_name,
+      passwordConfirm,
+    });
+
     setCurrentUser(user);
     if (error) return setErrorText(error.message);
 
