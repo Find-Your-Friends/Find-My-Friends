@@ -2,11 +2,31 @@
 // with the provided body and the remaining options
 import { fetchHandler, getPostOptions, getPatchOptions } from "../utils";
 
-const baseUrl = '/api/users';
+const baseUrl = "/api/users";
 
-export const createUser = async ({ username, password, email, age, fullName, gender, location,  profile_image,})=> (
-  fetchHandler(baseUrl, getPostOptions({ username, password, email, age, fullName, gender, location,  profile_image,}))
-);
+export const createUser = async ({
+  username,
+  password,
+  email,
+  age,
+  full_name,
+  gender,
+  location,
+  profile_pic,
+}) =>
+  fetchHandler(
+    baseUrl,
+    getPostOptions({
+      username,
+      password,
+      email,
+      age,
+      full_name,
+      gender,
+      location,
+      profile_pic,
+    })
+  );
 
 export const getAllUsers = async () => {
   const [users] = await fetchHandler(baseUrl);
@@ -15,16 +35,15 @@ export const getAllUsers = async () => {
 
 export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
-export const updateUsername = async ({ id, username }) => (
-  fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username }))
-);
+export const updateUsername = async ({ id, username }) =>
+  fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username }));
 
 export const updateUserInfo = async ({
   id,
   location,
   gender,
   age,
-  profile_image
+  profile_image,
 }) =>
   fetchHandler(
     `${baseUrl}/${id}`,
@@ -32,7 +51,7 @@ export const updateUserInfo = async ({
       location,
       gender,
       age,
-      profile_image
+      profile_image,
     })
   );
 
