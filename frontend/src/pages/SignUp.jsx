@@ -1,10 +1,14 @@
-
 import { useContext, useState } from "react";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { createUser } from "../adapters/user-adapter";
-import { Button, Input, Typography, Card, CardBody } from "@material-tailwind/react";
-import placeholder1 from '../images/placeholder1.jpeg'
+import {
+  Button,
+  Input,
+  Typography,
+  Card,
+  CardBody,
+} from "@material-tailwind/react";
 
 export default function SignUpPage() {
   const navigate = useNavigate();
@@ -13,23 +17,26 @@ export default function SignUpPage() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
-  const [fullName, setFullName] = useState("");
+  const [full_name, setFullName] = useState("");
   const [passwordConfirm, setPasswordConfirm] = useState("");
 
   if (currentUser) return <Navigate to="/" />;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    setErrorText('');
-    if (!username || !password || !email || !passwordConfirm || !fullName) return setErrorText('Missing Input fields');
+    setErrorText("");
+    if (!username || !password || !email || !passwordConfirm || !full_name) return setErrorText("Missing Input fields");
+    if (password !== passwordConfirm) return setErrorText("Passwords do not match");
 
-    if (password !== passwordConfirm) setErrorText("Passwords do not match");
-
-      const [user, error] = await createUser({ username, password, email, fullName:fullName, profile_pic:'../images/placeholder1.jpeg'});
-
-      
-      setCurrentUser(user);
-      if (error) return setErrorText(error.message);
+    const [user, error] = await createUser({
+      username,
+      password,
+      email,
+      full_name,
+      profile_pic: "../images/placeholder1.jpeg",
+    });
+    setCurrentUser(user);
+    if (error) return setErrorText(error.message);
 
     navigate("/additional-info");
   };
@@ -48,7 +55,11 @@ export default function SignUpPage() {
       <div className="flex flex-col items-center justify-center w-full lg:w-1/2 p-8 bg-cover bg-center">
         <Card className="w-full max-w-md p-8">
           <CardBody>
-            <Typography variant="h4" color="textPrimary" className="mb-2 text-center">
+            <Typography
+              variant="h4"
+              color="textPrimary"
+              className="mb-2 text-center"
+            >
               Sign Up
             </Typography>
             <form onSubmit={handleSubmit} aria-labelledby="create-heading">
@@ -75,7 +86,7 @@ export default function SignUpPage() {
                   name="full-name"
                   label="Full-Name"
                   onChange={handleChange}
-                  value={fullName}
+                  value={full_name}
                 />
               </div>
               <div className="mb-4">
@@ -120,23 +131,18 @@ export default function SignUpPage() {
               <Button type="submit" color="primary" size="lg" fullWidth>
                 Sign Up Now!
               </Button>
-              { !!errorText && <p className="mt-4 text-center text-red-500">{errorText}</p> }
+              {!!errorText && (
+                <p className="mt-4 text-center text-red-500">{errorText}</p>
+              )}
             </form>
             <p className="mt-4 text-center">
-              Already have an account with us? <Link to="/login" className="text-primary hover:underline">Log in!</Link>
+              Already have an account with us?{" "}
+              <Link to="/login" className="text-primary hover:underline">
+                Log in!
+              </Link>
             </p>
           </CardBody>
         </Card>
-      </div>
-      <div className=" hidden md:flex flex-col items-center justify-center w-1/2 bg-primary p-8">
-        <img src="/path/to/your/image.png" alt="Hangout" className="mb-6"/>
-        <Typography variant="h4" color="white" className="text-center">
-          Combat Loneliness
-        </Typography>
-        <Typography variant="body1" color="white" className="text-center mt-2">
-          Join hangouts and make genuine connections.
-        </Typography>
-        <Button color="secondary" className="mt-6"><Link to="/learnmore" >Learn More</Link></Button>
       </div>
     </div>
   );
