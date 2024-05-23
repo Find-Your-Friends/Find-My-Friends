@@ -8,5 +8,9 @@ export default function HomePage() {
 
   if (!currentUser)  return <Navigate to="/landing" />;
   return <>
+
+  <div>
+    This is the home / main page
+    </div>
   </>;
 }

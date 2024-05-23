@@ -114,34 +114,69 @@ class User {
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
   }
-  static async updateAdditionalInfomation(
-    id,
-    age,
-    gender,
-    location,
-    profile_pic
-  ) {
-    // dynamic queries are easier if you add more properties
-    const query = `
-      UPDATE users
-      SET age = ?, gender = ?, location = ?, profile_pic = ?
-      WHERE id=?
-      RETURNING *
-    `;
-    const { rows } = await knex.raw(query, [
-      age,
-      gender,
-      location,
-      profile_pic,
-      id,
-    ]);
-    const updatedUser = rows[0];
-    return updatedUser ? new User(updatedUser) : null;
+//   static async updateAdditionalInfomation(
+//     id,
+//     age = null,
+//     gender = null,
+//     location = null,
+//     profile_pic = null
+//   ) {
+//     // dynamic queries are easier if you add more properties
+//     const query = `
+//       UPDATE users
+//       SET age = ?, gender = ?, location = ?, profile_pic = ?
+//       WHERE id=?
+//       RETURNING *
+//     `;
+//     const { rows } = await knex.raw(query, [
+//       age,
+//       gender,
+//       location,
+//       profile_pic,
+//       id,
+//     ]);
+//     const updatedUser = rows[0];
+//     return updatedUser ? new User(updatedUser) : null;
+//   }
+
+static async updateAdditionalInfo(
+  id,
+  age = null,
+  gender = null,
+  location = null,
+  profile_pic = null
+) {
+  const fields = { age, gender, location, profile_pic };
+  const updates = [];
+  const values = [];
+
+  for (const [key, value] of Object.entries(fields)) {
+    if (value !== null) {
+      updates.push(`${key} = ?`);
+      values.push(value);
+    }
   }
 
-  static async deleteAll() {
-    return knex("users").del();
+  if (updates.length === 0) {
+    throw new Error('No valid fields to update');
   }
+
+  values.push(id);
+
+  const query = `
+    UPDATE users
+    SET ${updates.join(', ')}
+    WHERE id = ?
+    RETURNING *
+  `;
+  const { rows } = await knex.raw(query, values);
+  const updatedUser = rows[0];
+  return updatedUser ? new User(updatedUser) : null;
+}
+
+static async deleteAll() {
+  return knex('users').del();
+}
 }
 
 module.exports = User;

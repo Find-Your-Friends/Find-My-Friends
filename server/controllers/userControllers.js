@@ -67,7 +67,7 @@ exports.updateUserAdditionalInfo = async (req, res) => {
   // user (users should only be able to change their own profiles)
   if (!isAuthorized(id, req.session)) return res.sendStatus(403);
 
-  const updatedUser = await User.updateAdditionalInfomation(age, gender, location, profile_pic );
+  const updatedUser = await User.updateUserAdditionalInfo(age, gender, location, profile_pic );
   if (!updatedUser) return res.sendStatus(404);
   res.send(updatedUser);
 };

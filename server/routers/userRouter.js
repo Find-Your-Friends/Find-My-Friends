@@ -10,7 +10,9 @@ userRouter.post('/', userControllers.createUser);
 // Express lets us pass a piece of middleware to run for a specific endpoint
 userRouter.get('/', checkAuthentication, userControllers.listUsers);
 userRouter.get('/:id', checkAuthentication, userControllers.showUser);
-userRouter.patch('/:id', checkAuthentication, userControllers.updateUser);
 userRouter.patch('/:id', checkAuthentication, userControllers.updateUserAdditionalInfo);
+// userRouter.patch('/:id', checkAuthentication, userControllers.updateUser);
 
 module.exports = userRouter;
+
+// updateAdditionalInfomation
