@@ -28,13 +28,17 @@ export default function SignUpPage() {
     if (!username || !password || !email || !passwordConfirm || !full_name) return setErrorText("Missing Input fields");
     if (password !== passwordConfirm) return setErrorText("Passwords do not match");
 
-    const [user, error] = await createUser({
+    // full_name : full_name === "" ? null : full_name,
+    
+    const userData = {
       username,
       password,
       email,
-      full_name : full_name === ""? null:full_name,
+      full_name,
       profile_pic: "../images/placeholder1.jpeg",
-    });
+    }
+
+    const [user, error] = await createUser(userData);
     setCurrentUser(user);
     if (error) return setErrorText(error.message);
 

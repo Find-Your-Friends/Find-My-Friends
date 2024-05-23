@@ -42,7 +42,7 @@ const handleSubmit = async (event) => {
                 <div className="w-72">
                     <Input label="location" name="location" value = {location} onChange={handleChange} icon={<i className="fas fa-heart" />} />
                     <Input label="gender" name="gender" value = {gender} onChange={handleChange} icon={<i className="fas fa-heart" />} />
-                    <Input label="name" name="age" value = {age} onChange={handleChange} icon={<i className="fas fa-heart" />} />
+                    <Input label="age" name="age" value = {age} onChange={handleChange} icon={<i className="fas fa-heart" />} />
                     <Button type="submit" color="primary" size="lg" fullWidth>Submit</Button>
                     {/* <Input label="Input With Icon" value = {} icon={<i className="fas fa-heart" />} /> */}
                 </div>

@@ -85,7 +85,7 @@ class User {
     // Hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await authUtils.hashPassword(password);
   
-    full_name = full_name === "" ? null : full_name;
+    // full_name = full_name === "" ? null : full_name;
 
     const query = `INSERT INTO users (username, password_hash, email, full_name, age, gender, location, profile_pic)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`;
