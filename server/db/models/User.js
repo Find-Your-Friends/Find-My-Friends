@@ -60,7 +60,7 @@ class User {
     username,
     password,
     email,
-    full_name = "",  
+    full_name="",
     age = null,
     gender = null,
     location = null,
@@ -70,21 +70,21 @@ class User {
       username,
       password,
       email,
-      full_name,  
+      full_name,
       age,
       gender,
       location,
       profile_pic,
     });
-  
+
     // Ensure all required parameters are provided
     if (!username || !password || !email) {
       throw new Error("Missing required fields: username, password, or email");
     }
-  
+
     // Hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await authUtils.hashPassword(password);
-  
+
     // full_name = full_name === "" ? null : full_name;
 
     const query = `INSERT INTO users (username, password_hash, email, full_name, age, gender, location, profile_pic)
@@ -93,17 +93,17 @@ class User {
       username,
       passwordHash,
       email,
-      full_name,  
+      full_name,
       age,
       gender,
       location,
       profile_pic,
     ]);
-  
+
     if (rows.length === 0) {
       throw new Error("User creation failed");
     }
-  
+
     const user = rows[0];
     return new User(user);
   }
@@ -121,8 +121,7 @@ class User {
     return updatedUser ? new User(updatedUser) : null;
   }
 
-  static async updateAdditionalInformation(id, age, gender, location
-    ) { 
+  static async updateAdditionalInformation(id, age, gender, location) {
     // dynamic queries are easier if you add more properties
     const query = `
       UPDATE users
@@ -130,12 +129,7 @@ class User {
       WHERE id=?
       RETURNING *
     `;
-    const { rows } = await knex.raw(query, [
-      age,
-      gender,
-      location,
-      id,
-    ]);
+    const { rows } = await knex.raw(query, [age, gender, location, id]);
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
   }

@@ -14,44 +14,50 @@ export default function SignUpPage() {
   const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [errorText, setErrorText] = useState("");
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const [email, setEmail] = useState("");
-  const [full_name, setFullName] = useState("");
-  const [passwordConfirm, setPasswordConfirm] = useState("");
+  const [formData, setFormData] = useState({
+    username: "",
+    password: "",
+    email: "",
+    full_name: "",
+    passwordConfirm: "",
+  });
 
   if (currentUser) return <Navigate to="/" />;
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorText("");
-    if (!username || !password || !email || !passwordConfirm || !full_name) return setErrorText("Missing Input fields");
-    if (password !== passwordConfirm) return setErrorText("Passwords do not match");
+    const { username, password, email, full_name, passwordConfirm } = formData;
 
-    // full_name : full_name === "" ? null : full_name,
-    
+    if (!username || !password || !email || !passwordConfirm || !full_name) {
+      return setErrorText("Missing Input fields");
+    }
+    if (password !== passwordConfirm) {
+      return setErrorText("Passwords do not match");
+    }
+
     const userData = {
       username,
       password,
       email,
       full_name,
       profile_pic: "../images/placeholder1.jpeg",
-    }
+    };
 
     const [user, error] = await createUser(userData);
-    setCurrentUser(user);
     if (error) return setErrorText(error.message);
 
+    setCurrentUser(user);
     navigate("/additional-info");
   };
 
   const handleChange = (event) => {
     const { name, value } = event.target;
-    if (name === "username") setUsername(value);
-    if (name === "password") setPassword(value);
-    if (name === "email") setEmail(value);
-    if (name === "full_name") setFullName(value);
-    if (name === "password-confirm") setPasswordConfirm(value);
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+    console.log(name, value);
   };
 
   return (
@@ -77,7 +83,7 @@ export default function SignUpPage() {
                   name="email"
                   label="Email"
                   onChange={handleChange}
-                  value={email}
+                  value={formData.email}
                 />
               </div>
               <div className="mb-4">
@@ -90,7 +96,7 @@ export default function SignUpPage() {
                   name="full_name"
                   label="Full-Name"
                   onChange={handleChange}
-                  value={full_name}
+                  value={formData.full_name}
                 />
               </div>
               <div className="mb-4">
@@ -103,7 +109,7 @@ export default function SignUpPage() {
                   name="username"
                   label="Username"
                   onChange={handleChange}
-                  value={username}
+                  value={formData.username}
                 />
               </div>
               <div className="mb-4">
@@ -116,7 +122,7 @@ export default function SignUpPage() {
                   name="password"
                   label="Password"
                   onChange={handleChange}
-                  value={password}
+                  value={formData.password}
                 />
               </div>
               <div className="mb-4">
@@ -126,10 +132,10 @@ export default function SignUpPage() {
                   size="lg"
                   autoComplete="off"
                   id="Confirm your password"
-                  name="password-confirm"
+                  name="passwordConfirm"
                   label="Confirm your password"
                   onChange={handleChange}
-                  value={passwordConfirm}
+                  value={formData.passwordConfirm}
                 />
               </div>
               <Button type="submit" color="primary" size="lg" fullWidth>
