@@ -43,7 +43,6 @@ export const updateUserInfo = async ({
   location,
   gender,
   age,
-  profile_image,
 }) =>
   fetchHandler(
     `${baseUrl}/${id}`,
@@ -51,7 +50,6 @@ export const updateUserInfo = async ({
       location,
       gender,
       age,
-      profile_image,
     })
   );
 

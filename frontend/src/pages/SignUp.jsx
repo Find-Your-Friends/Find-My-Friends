@@ -32,7 +32,7 @@ export default function SignUpPage() {
       username,
       password,
       email,
-      full_name,
+      full_name : full_name === ""? null:full_name,
       profile_pic: "../images/placeholder1.jpeg",
     });
     setCurrentUser(user);
@@ -46,7 +46,7 @@ export default function SignUpPage() {
     if (name === "username") setUsername(value);
     if (name === "password") setPassword(value);
     if (name === "email") setEmail(value);
-    if (name === "full-name") setFullName(value);
+    if (name === "full_name") setFullName(value);
     if (name === "password-confirm") setPasswordConfirm(value);
   };
 
@@ -83,7 +83,7 @@ export default function SignUpPage() {
                   size="lg"
                   autoComplete="off"
                   id="Full-Name"
-                  name="full-name"
+                  name="full_name"
                   label="Full-Name"
                   onChange={handleChange}
                   value={full_name}
