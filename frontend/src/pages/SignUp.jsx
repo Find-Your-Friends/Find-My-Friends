@@ -27,13 +27,15 @@ export default function SignUpPage() {
     setErrorText('');
     if (!username || !password || !email || !passwordConfirm || !fullName) return setErrorText('Missing Input fields');
 
-    if (password !== passwordConfirm) setErrorText("Passwords do not match");
-
-      const [user, error] = await createUser({ username, password, email, fullName:fullName, profile_pic:'../images/placeholder1.jpeg'});
-
-      
-      setCurrentUser(user);
-      if (error) return setErrorText(error.message);
+    const [user, error] = await createUser({
+      username,
+      password,
+      email,
+      full_name : full_name === ""? null:full_name,
+      profile_pic: "../images/placeholder1.jpeg",
+    });
+    setCurrentUser(user);
+    if (error) return setErrorText(error.message);
 
     navigate("/additional-info");
   };
@@ -43,7 +45,7 @@ export default function SignUpPage() {
     if (name === "username") setUsername(value);
     if (name === "password") setPassword(value);
     if (name === "email") setEmail(value);
-    if (name === "full-name") setFullName(value);
+    if (name === "full_name") setFullName(value);
     if (name === "password-confirm") setPasswordConfirm(value);
   };
 
@@ -80,7 +82,7 @@ export default function SignUpPage() {
                   size="lg"
                   autoComplete="off"
                   id="Full-Name"
-                  name="full-name"
+                  name="full_name"
                   label="Full-Name"
                   onChange={handleChange}
                   value={full_name}

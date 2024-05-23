@@ -73,7 +73,7 @@ exports.updateUser = async (req, res) => {
 // };
 
 exports.updateUserAdditionalInfo = async (req, res) => {
-  const { age, gender, location, profile_pic } = req.body;
+  const { age, gender, location} = req.body;
   const { id } = req.params;
 
   // Authorization check
@@ -83,7 +83,7 @@ exports.updateUserAdditionalInfo = async (req, res) => {
 
   try {
     // Update user additional information
-    const updatedUser = await User.updateAdditionalInformation(id, age, gender, location, profile_pic);
+    const updatedUser = await User.updateAdditionalInformation(id, age, gender, location);
     if (!updatedUser) {
       return res.sendStatus(404);
     }

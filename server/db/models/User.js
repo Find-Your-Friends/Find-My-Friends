@@ -60,7 +60,7 @@ class User {
     username,
     password,
     email,
-    full_name = "",  // updated to full_name to match frontend
+    full_name = "",  
     age = null,
     gender = null,
     location = null,
@@ -70,7 +70,7 @@ class User {
       username,
       password,
       email,
-      full_name,  // updated to full_name to match frontend
+      full_name,  
       age,
       gender,
       location,
@@ -85,13 +85,15 @@ class User {
     // Hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await authUtils.hashPassword(password);
   
+    full_name = full_name === "" ? null : full_name;
+
     const query = `INSERT INTO users (username, password_hash, email, full_name, age, gender, location, profile_pic)
       VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       username,
       passwordHash,
       email,
-      full_name,  // updated to full_name to match frontend
+      full_name,  
       age,
       gender,
       location,
@@ -118,65 +120,25 @@ class User {
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
   }
-//   static async updateAdditionalInfomation(
-//     id,
-//     age = null,
-//     gender = null,
-//     location = null,
-//     profile_pic = null
-//   ) {
-//     // dynamic queries are easier if you add more properties
-//     const query = `
-//       UPDATE users
-//       SET age = ?, gender = ?, location = ?, profile_pic = ?
-//       WHERE id=?
-//       RETURNING *
-//     `;
-//     const { rows } = await knex.raw(query, [
-//       age,
-//       gender,
-//       location,
-//       profile_pic,
-//       id,
-//     ]);
-//     const updatedUser = rows[0];
-//     return updatedUser ? new User(updatedUser) : null;
-//   }
 
-static async updateAdditionalInfo(
-  id,
-  age = null,
-  gender = null,
-  location = null,
-  profile_pic = null
-) {
-  const fields = { age, gender, location, profile_pic };
-  const updates = [];
-  const values = [];
-
-  for (const [key, value] of Object.entries(fields)) {
-    if (value !== null) {
-      updates.push(`${key} = ?`);
-      values.push(value);
-    }
+  static async updateAdditionalInformation(id, age, gender, location
+    ) { 
+    // dynamic queries are easier if you add more properties
+    const query = `
+      UPDATE users
+      SET age = ?, gender = ?, location = ?
+      WHERE id=?
+      RETURNING *
+    `;
+    const { rows } = await knex.raw(query, [
+      age,
+      gender,
+      location,
+      id,
+    ]);
+    const updatedUser = rows[0];
+    return updatedUser ? new User(updatedUser) : null;
   }
-
-  if (updates.length === 0) {
-    throw new Error('No valid fields to update');
-  }
-
-  values.push(id);
-
-  const query = `
-    UPDATE users
-    SET ${updates.join(', ')}
-    WHERE id = ?
-    RETURNING *
-  `;
-  const { rows } = await knex.raw(query, values);
-  const updatedUser = rows[0];
-  return updatedUser ? new User(updatedUser) : null;
-}
 
   static async deleteAll() {
     return knex("users").del();
