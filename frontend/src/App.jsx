@@ -10,6 +10,7 @@ import { checkForLoggedInUser } from './adapters/auth-adapter';
 import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 import { AdditionalInfo } from './components/Additional-Info';
+import PersonalInfo from './components/PersonalInfo';
 // import AboutPage from './pages/LearnMore';
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path="/additional-info" element={<AdditionalInfo />} />
+        <Route path="/personal-info" element={<PersonalInfo />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/sign-up' element={<SignUpPage />} />
         <Route path='/users' element={<UsersPage />} />
