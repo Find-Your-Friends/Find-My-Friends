@@ -27,7 +27,7 @@ const handleSubmit = async (event) => {
       setCurrentUser(user);
     
       if (error) return setError(error.statusText);
-      navigate("/Home");
+      navigate("/personal-info");
     }
 
     const  handleChange = (event) => {

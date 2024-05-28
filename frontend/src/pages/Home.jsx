@@ -7,10 +7,7 @@ export default function HomePage() {
   const {currentUser, setCurrentUser} = useContext(CurrentUserContext)
 
   if (!currentUser)  return <Navigate to="/landing" />;
-  return <>
-
-  <div>
-    This is the home / main page
-    </div>
-  </>;
+  return <div>
+     <h1>This is the home / main page</h1>
+  </div>;
 }
