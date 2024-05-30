@@ -53,7 +53,7 @@ export default function PersonalInfo() {
             {!isFirstStep && (
               <Button
                 variant="outlined"
-                color="blue"
+                color="black"
                 className="flex items-center gap-2"
                 type="button"
                 onClick={prevStep}
@@ -78,7 +78,7 @@ export default function PersonalInfo() {
 
             <Button
               variant="gradient"
-              color="blue"
+              color="grey"
               className="flex items-center gap-2 ml-auto"
               type="submit"
             >
