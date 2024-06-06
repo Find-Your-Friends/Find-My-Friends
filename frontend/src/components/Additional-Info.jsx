@@ -5,7 +5,7 @@ import { updateUserInfo } from "../adapters/user-adapter";
 import { Input, Button} from "@material-tailwind/react";
 
 export const AdditionalInfo = () => {
-    const { currentUser, setCurrentUser, accountType } = useContext(CurrentUserContext);
+    const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
     const [location, setLocation] = useState("");
     const [gender, setGender] = useState("");
     const [age, setAge] = useState("");

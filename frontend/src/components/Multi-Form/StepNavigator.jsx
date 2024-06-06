@@ -15,7 +15,7 @@ export default function useStepNavigator(steps){
         }
       };
     
-      const goTo = (index) => {
+      const goToStep = (index) => {
         if (index >= 0 && index < steps.length) {
           setCurrentStepIndex(index);
         }
@@ -27,7 +27,7 @@ export default function useStepNavigator(steps){
         isFirstStep: currentStepIndex === 0,
         isLastStep: currentStepIndex === steps.length-1,
         nextStep,
-        goTo,
+        goToStep,
         prevStep
     }
 

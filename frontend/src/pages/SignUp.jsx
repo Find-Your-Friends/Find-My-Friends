@@ -4,7 +4,7 @@ import CurrentUserContext from "../contexts/current-user-context";
 import { createUser } from "../adapters/user-adapter";
 // import placeholder1 from '../images/placeholder1.jpeg'
 import placeholder2 from '../images/placeholder2.jpeg'
-import { SimpleFooter } from "../components/SignupFooter";
+// import { SimpleFooter } from "../components/SignupFooter";
 import {
   Button,
   Input,

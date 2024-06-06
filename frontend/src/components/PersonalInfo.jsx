@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Button, Card, Typography, Progress } from "@material-tailwind/react";
 import initialData from "./Multi-Form/InitialData";
 import Form1 from "./Multi-Form/Form1";
 import Form2 from "./Multi-Form/Form2";
 import Form3 from "./Multi-Form/Form3";
 import useStepNavigator from "./Multi-Form/StepNavigator";
+import { useNavigate, Navigate, Link } from "react-router-dom";
+import CurrentUserContext from "../contexts/current-user-context";
 
 export default function PersonalInfo() {
+  const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [formData, setFormData] = useState(initialData);
   const steps = [
     <Form1 formData={formData} setFormData={setFormData} />,
@@ -19,7 +22,7 @@ export default function PersonalInfo() {
     isFirstStep,
     isLastStep,
     nextStep,
-    goTo,
+    goToStep,
     prevStep,
   } = useStepNavigator(steps);
 
@@ -75,7 +78,7 @@ export default function PersonalInfo() {
                 Prev
               </Button>
             )}
-
+            {/* <Button></Button> */}
             <Button
               variant="gradient"
               color="grey"

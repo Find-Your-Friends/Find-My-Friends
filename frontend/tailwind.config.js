@@ -30,6 +30,9 @@ module.exports = withMT({
         'xs': '475px',
         '2xl': '1440px',
       },
+      menu: {
+        
+      }
     },
   },
   plugins: [
