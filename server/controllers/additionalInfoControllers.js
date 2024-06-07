@@ -1,5 +1,5 @@
 const { isAuthorized } = require("../utils/auth-utils");
-const AdditionalInfo = require("../db/models/AdditionalInfo"); // Ensure correct path and naming
+const AdditionalInfo = require("../db/models/Additional_info"); // Ensure correct path and naming
 
 exports.addAdditionalInfo = async (req, res) => {
   const {
@@ -15,9 +15,9 @@ exports.addAdditionalInfo = async (req, res) => {
     values,
     beliefs,
   } = req.body;
-
+console.log(req.body)
   const { userId } = req.session;
-
+console.log(userId)
   // Ensure the user is authorized
   if (!isAuthorized(userId, req.session)) {
     return res.sendStatus(403);
@@ -44,4 +44,14 @@ exports.addAdditionalInfo = async (req, res) => {
     console.error(error);
     res.status(500).send({ error: "Internal server error" });
   }
+};
+exports.listAdditionalInfo = async (req, res) => {
+  const additional = await AdditionalInfo.list();
+  res.send(additional);
+};
+
+exports.showAdditional = async (req, res) => {
+  const { id } = req.params;
+  const additional = await AdditionalInfo(id);
+  res.send(additional);
 };

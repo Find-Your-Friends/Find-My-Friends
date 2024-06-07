@@ -14,7 +14,6 @@ class AdditionalInfo {
 
   // Create a new additional information entry
   static async create({
-    user_id,
     wants,
     interests,
     hobbies,

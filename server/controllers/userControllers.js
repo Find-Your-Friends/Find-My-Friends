@@ -11,6 +11,13 @@ exports.createUser = async (req, res) => {
     gender,
     location,
     profile_pic,
+    expectation,
+    hobbies,
+    preferred_group_size,
+    frequency_of_socialising,
+    personality_type,
+    gender_preference,
+    ice_breaker_question
   } = req.body;
 
   // TODO: check if username is taken, and if it is what should you return?
@@ -22,7 +29,14 @@ exports.createUser = async (req, res) => {
     age,
     gender,
     location,
-    profile_pic
+    profile_pic,
+    expectation,
+    hobbies,
+    preferred_group_size,
+    frequency_of_socialising,
+    personality_type,
+    gender_preference,
+    ice_breaker_question
   );
   req.session.userId = user.id;
 
@@ -57,7 +71,6 @@ exports.updateUser = async (req, res) => {
   res.send(updatedUser);
 };
 
-
 // exports.updateUserAdditionalInfo = async (req, res) => {
 //   const { age, gender, location, profile_pic } = req.body;
 //   const { id } = req.params;
@@ -73,7 +86,7 @@ exports.updateUser = async (req, res) => {
 // };
 
 exports.updateUserAdditionalInfo = async (req, res) => {
-  const { age, gender, location} = req.body;
+  const { age, gender, location,expectation, hobbies,preferred_group_size,frequency_of_socialising,personality_type, gender_preference, ice_breaker_question  } = req.body;
   const { id } = req.params;
 
   // Authorization check
@@ -83,7 +96,20 @@ exports.updateUserAdditionalInfo = async (req, res) => {
 
   try {
     // Update user additional information
-    const updatedUser = await User.updateAdditionalInformation(id, age, gender, location);
+    const updatedUser = await User.updateAdditionalInformation(
+      id,
+      age,
+      gender,
+      location,
+      expectation,
+      hobbies,
+      preferred_group_size,
+      types_of_events,
+      frequency_of_socialising,
+      personality_type,
+      gender_preference,
+      ice_breaker_question
+    );
     if (!updatedUser) {
       return res.sendStatus(404);
     }

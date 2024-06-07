@@ -18,6 +18,13 @@ class User {
     gender,
     location,
     profile_pic,
+    expectation,
+    hobbies,
+    preferred_group_size,
+    frequency_of_socialising,
+    personality_type,
+    gender_preference,
+    ice_breaker_question,
   }) {
     this.id = id;
     this.username = username;
@@ -28,6 +35,13 @@ class User {
     this.gender = gender;
     this.location = location;
     this.profile_pic = profile_pic;
+    this.expectation = expectation;
+    this.hobbies = hobbies;
+    this.preferred_group_size = preferred_group_size;
+    this.frequency_of_socialising = frequency_of_socialising;
+    this.gender_preference = gender_preference;
+    this.personality_type = personality_type;
+    this.ice_breaker_question = ice_breaker_question;
   }
 
   // This instance method takes in a plain-text password and returns true if it matches
@@ -60,11 +74,18 @@ class User {
     username,
     password,
     email,
-    full_name="",
+    full_name = "",
     age = null,
     gender = null,
     location = null,
-    profile_pic = null
+    profile_pic = null,
+    expectation = null,
+    hobbies = null,
+    preferred_group_size = null,
+    frequency_of_socialising = null,
+    personality_type = null,
+    gender_preference = null,
+    ice_breaker_question = null
   ) {
     console.log("Parameters:", {
       username,
@@ -87,8 +108,13 @@ class User {
 
     // full_name = full_name === "" ? null : full_name;
 
-    const query = `INSERT INTO users (username, password_hash, email, full_name, age, gender, location, profile_pic)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`;
+    const query = `INSERT INTO users (username, password_hash, email, full_name, age, gender, location, profile_pic, expectation,
+      hobbies,
+      preferred_group_size,
+      frequency_of_socialising,
+      personality_type,
+      gender_preference, ice_breaker_question)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       username,
       passwordHash,
@@ -98,6 +124,13 @@ class User {
       gender,
       location,
       profile_pic,
+      expectation,
+      hobbies,
+      preferred_group_size,
+      frequency_of_socialising,
+      personality_type,
+      gender_preference,
+      ice_breaker_question,
     ]);
 
     if (rows.length === 0) {
@@ -121,15 +154,40 @@ class User {
     return updatedUser ? new User(updatedUser) : null;
   }
 
-  static async updateAdditionalInformation(id, age, gender, location) {
+  static async updateAdditionalInformation(
+    id,
+    age,
+    gender,
+    location,
+    expectation,
+    hobbies,
+    preferred_group_size,
+    frequency_of_socialising,
+    personality_type,
+    gender_preference,
+    ice_breaker_question
+  ) {
     // dynamic queries are easier if you add more properties
     const query = `
       UPDATE users
-      SET age = ?, gender = ?, location = ?
+      SET age = ?, gender = ?, location = ?, expectation = ?, hobbies = ?, preferred_group_size = ?, frequency_of_socialising = ?,
+      personality_type = ?, gender_preference = ?, ice_breaker_question = ?
       WHERE id=?
       RETURNING *
     `;
-    const { rows } = await knex.raw(query, [age, gender, location, id]);
+    const { rows } = await knex.raw(query, [
+      age,
+      gender,
+      location,
+      expectation,
+      hobbies,
+      preferred_group_size,
+      frequency_of_socialising,
+      personality_type,
+      gender_preference,
+      ice_breaker_question,
+      id,
+    ]);
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
   }
