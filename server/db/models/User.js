@@ -167,6 +167,19 @@ class User {
     gender_preference,
     ice_breaker_question
   ) {
+    console.log("Params", {
+      id,
+      age,
+      gender,
+      location,
+      expectation,
+      hobbies,
+      preferred_group_size,
+      frequency_of_socialising,
+      personality_type,
+      gender_preference,
+      ice_breaker_question,
+    });
     // dynamic queries are easier if you add more properties
     const query = `
       UPDATE users

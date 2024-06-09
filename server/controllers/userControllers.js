@@ -88,7 +88,6 @@ exports.updateUser = async (req, res) => {
 exports.updateUserAdditionalInfo = async (req, res) => {
   const { age, gender, location,expectation, hobbies,preferred_group_size,frequency_of_socialising,personality_type, gender_preference, ice_breaker_question  } = req.body;
   const { id } = req.params;
-
   // Authorization check
   if (!isAuthorized(id, req.session)) {
     return res.sendStatus(403);

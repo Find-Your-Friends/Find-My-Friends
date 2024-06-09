@@ -13,13 +13,13 @@ exports.up = (knex) => {
     table.string("gender");
     table.string("location");
     table.string("profile_pic");
-    table.string("expectation").notNullable();
+    table.string("expectation");
     table.string("hobbies");
     table.string("preferred_group_size");
     table.string("frequency_of_socialising");
     table.string("personality_type");
     table.string("gender_preference");
-    table.string("ice_breaker_question")
+    table.string("ice_breaker_question");
     table.timestamps(true, true);
   });
 };
