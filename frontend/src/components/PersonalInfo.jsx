@@ -5,12 +5,16 @@ import Form1 from "./Multi-Form/Form1";
 import Form2 from "./Multi-Form/Form2";
 import Form3 from "./Multi-Form/Form3";
 import useStepNavigator from "./Multi-Form/StepNavigator";
+import { updateAdditionalInformation } from "../adapters/user-adapter";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
+// import { updateAdditionalInformation } from "../../../server/db/models/User";
 
 export default function PersonalInfo() {
+  const navigate = useNavigate();
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [formData, setFormData] = useState(initialData);
+  const [error, setError] = useState("");
   const steps = [
     <Form1 formData={formData} setFormData={setFormData} />,
     <Form2 formData={formData} setFormData={setFormData} />,
@@ -26,14 +30,33 @@ export default function PersonalInfo() {
     prevStep,
   } = useStepNavigator(steps);
 
-  function handleSubmit(event) {
+   async function handleSubmit(event) {
     event.preventDefault();
     if (!isLastStep) {
       nextStep();
     } else {
       // Handle form submission
+      const {user, error} = await updateAdditionalInformation({
+        id: currentUser.id,
+        location,
+        age,
+        gender,
+        location,
+        profile_pic,
+        expectation,
+        hobbies,
+        preferred_group_size,
+        frequency_of_socialising,
+        personality_type,
+        gender_preference,
+        ice_breaker_question,
+      })
+      setCurrentUser(user)
+      if (error) setError(error)
+      navigate("/");
       console.log("Form submitted", formData);
     }
+
   }
 
   return (

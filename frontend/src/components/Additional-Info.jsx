@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
-import { updateUserInfo } from "../adapters/user-adapter";
+import { updateAdditionalInformation } from "../adapters/user-adapter";
 import { Input, Button} from "@material-tailwind/react";
 
 export const AdditionalInfo = () => {
@@ -18,7 +18,7 @@ const handleSubmit = async (event) => {
     event.preventDefault();
     setError("");
     
-      const {user, error} = await updateUserInfo({
+      const {user, error} = await updateAdditionalInformation({
         id: currentUser.id,
         location,
         gender,
