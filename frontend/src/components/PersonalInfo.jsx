@@ -8,7 +8,6 @@ import useStepNavigator from "./Multi-Form/StepNavigator";
 import { updateAdditionalInformation } from "../adapters/user-adapter";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
-// import { updateAdditionalInformation } from "../../../server/db/models/User";
 
 export default function PersonalInfo() {
   const navigate = useNavigate();
@@ -35,10 +34,23 @@ export default function PersonalInfo() {
     if (!isLastStep) {
       nextStep();
     } else {
+      //deconstruct form data
+      const {
+        age,
+        gender,
+        location,
+        profile_pic,
+        expectation,
+        hobbies,
+        preferred_group_size,
+        frequency_of_socialising,
+        personality_type,
+        gender_preference,
+        ice_breaker_question
+      } = formData
       // Handle form submission
       const {user, error} = await updateAdditionalInformation({
         id: currentUser.id,
-        location,
         age,
         gender,
         location,

@@ -79,7 +79,7 @@ class User {
     gender = null,
     location = null,
     profile_pic = null,
-    expectation = null,
+    expectation = "default value",
     hobbies = null,
     preferred_group_size = null,
     frequency_of_socialising = null,

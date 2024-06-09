@@ -103,7 +103,6 @@ exports.updateUserAdditionalInfo = async (req, res) => {
       expectation,
       hobbies,
       preferred_group_size,
-      types_of_events,
       frequency_of_socialising,
       personality_type,
       gender_preference,

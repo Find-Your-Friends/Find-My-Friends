@@ -63,9 +63,9 @@
 const initialData = {
 
     basicInfo: {
-        Age: "",
-        Gender: "",
-        Location: ""
+        age: "",
+        gender: "",
+        location: ""
     },
 
     defaultPrefernces: {
