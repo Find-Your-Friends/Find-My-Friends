@@ -11,6 +11,7 @@ import UsersPage from './pages/Users';
 import UserPage from './pages/User';
 import { AdditionalInfo } from './components/Additional-Info';
 import PersonalInfo from './components/PersonalInfo';
+import LandingPage from './pages/Landing';
 // import AboutPage from './pages/LearnMore';
 
 export default function App() {
@@ -24,6 +25,7 @@ export default function App() {
     <main>
       <Routes>
         <Route path='/' element={<Home />} />
+        <Route path="/landing-page" element={<LandingPage />} />
         <Route path="/additional-info" element={<AdditionalInfo />} />
         <Route path="/personal-info" element={<PersonalInfo />} />
         <Route path='/login' element={<LoginPage />} />

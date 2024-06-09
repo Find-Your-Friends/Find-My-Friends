@@ -6,7 +6,7 @@ import { Input, Button, Typography} from "@material-tailwind/react";
 
 import React, { useState, useEffect } from "react";
 
-const API_KEY = "AIzaSyC0FuBm4MDFDTvUYZy8d7tCi2t2xTWKPYU";
+// const API_KEY = "AIzaSyC0FuBm4MDFDTvUYZy8d7tCi2t2xTWKPYU";
 
 export const UserLocation = () => {
     const [userLocation, setUserLocation] = useState();

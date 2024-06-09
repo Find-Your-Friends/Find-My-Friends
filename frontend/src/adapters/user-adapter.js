@@ -32,18 +32,35 @@ export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 export const updateUsername = async ({ id, username }) =>
   fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username }));
 
-export const updateUserInfo = async ({
+export const updateAdditionalInformation = async ({
   id,
   location,
-  gender,
   age,
+  gender,
+  profile_pic,
+  expectation,
+  hobbies,
+  preferred_group_size,
+  frequency_of_socialising,
+  personality_type,
+  gender_preference,
+  ice_breaker_question,
 }) =>
   fetchHandler(
     `${baseUrl}/${id}`,
     getPatchOptions({
       location,
-      gender,
       age,
+      gender,
+      location,
+      profile_pic,
+      expectation,
+      hobbies,
+      preferred_group_size,
+      frequency_of_socialising,
+      personality_type,
+      gender_preference,
+      ice_breaker_question,
     })
   );
 
