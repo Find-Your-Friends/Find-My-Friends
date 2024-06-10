@@ -17,7 +17,8 @@ exports.createUser = async (req, res) => {
     frequency_of_socialising,
     personality_type,
     gender_preference,
-    ice_breaker_question
+    ice_breaker_question,
+    a_secret
   } = req.body;
 
   // TODO: check if username is taken, and if it is what should you return?
@@ -36,7 +37,8 @@ exports.createUser = async (req, res) => {
     frequency_of_socialising,
     personality_type,
     gender_preference,
-    ice_breaker_question
+    ice_breaker_question,
+    a_secret
   );
   req.session.userId = user.id;
 
@@ -86,7 +88,7 @@ exports.updateUser = async (req, res) => {
 // };
 
 exports.updateUserAdditionalInfo = async (req, res) => {
-  const { age, gender, location,expectation, hobbies,preferred_group_size,frequency_of_socialising,personality_type, gender_preference, ice_breaker_question  } = req.body;
+  const { age, gender, location,expectation, hobbies,preferred_group_size,frequency_of_socialising,personality_type, gender_preference, ice_breaker_question, a_secret  } = req.body;
   const { id } = req.params;
   // Authorization check
   if (!isAuthorized(id, req.session)) {
@@ -106,7 +108,8 @@ exports.updateUserAdditionalInfo = async (req, res) => {
       frequency_of_socialising,
       personality_type,
       gender_preference,
-      ice_breaker_question
+      ice_breaker_question,
+      a_secret
     );
     if (!updatedUser) {
       return res.sendStatus(404);

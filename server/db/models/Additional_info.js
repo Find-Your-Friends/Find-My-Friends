@@ -14,37 +14,37 @@ class AdditionalInfo {
 
   // Create a new additional information entry
   static async create({
-    wants,
-    interests,
+    age,
+    gender,
+    location,
+    expectation,
     hobbies,
     preferred_group_size,
-    types_of_events,
     frequency_of_socialising,
     personality_type,
     gender_preference,
-    personality_traits,
-    values,
-    beliefs,
+    ice_breaker_question,
+    a_secret,
   }) {
     // Ensure required parameters are provided
-    if (!user_id || !wants) {
-      throw new Error("Missing required fields: user_id or wants");
+    if (!user_id || !expectation) {
+      throw new Error("Missing required fields: user_id or expectation");
     }
 
     const [additionalInfo] = await knex("additional_info")
       .insert({
         user_id,
-        wants,
-        interests,
+        age,
+        gender,
+        location,
+        expectation,
         hobbies,
         preferred_group_size,
-        types_of_events,
         frequency_of_socialising,
         personality_type,
         gender_preference,
-        personality_traits,
-        values,
-        beliefs,
+        ice_breaker_question,
+        a_secret,
       })
       .returning("*");
 
@@ -57,3 +57,15 @@ class AdditionalInfo {
 }
 
 module.exports = AdditionalInfo;
+
+        // wants,
+        // interests,
+        // hobbies,
+        // preferred_group_size,
+        // types_of_events,
+        // frequency_of_socialising,
+        // personality_type,
+        // gender_preference,
+        // personality_traits,
+        // values,
+        // beliefs,

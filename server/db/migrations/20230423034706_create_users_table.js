@@ -20,6 +20,7 @@ exports.up = (knex) => {
     table.string("personality_type");
     table.string("gender_preference");
     table.string("ice_breaker_question");
+    table.string("a_secret");
     table.timestamps(true, true);
   });
 };

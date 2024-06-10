@@ -5,7 +5,6 @@ const User = require("../models/User");
  */
 exports.seed = async (knex) => {
   // Clear the tables
-
   await knex("users").del();
 
   // Reset the ID sequences
@@ -21,15 +20,16 @@ exports.seed = async (knex) => {
     "Female",
     "NYC",
     "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=1000&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8cHJvZmlsZXxlbnwwfHwwfHx8MA%3D%3D",
-   "Friendship",
+    "Friendship",
     "Music, Traveling",
     "Small",
-   "Often",
+    "Often",
     "Extrovert",
     "Any",
     "Friendly, Outgoing",
-
+    "I'm actually afraid of the dark, even though I'm an adult."
   );
+
   const user2 = await User.create(
     "l33t-guy",
     "1234",
@@ -46,7 +46,9 @@ exports.seed = async (knex) => {
     "Introvert",
     "Any",
     "Analytical, Thoughtful",
+    "I have a hidden talent for singing, but I never sing in front of others because I'm too shy."
   );
+
   const user3 = await User.create(
     "wowow",
     "1234",
@@ -63,6 +65,6 @@ exports.seed = async (knex) => {
     "Ambivert",
     "Female",
     "Creative, Empathetic",
+    "I once accidentally crashed my neighbor's car and never told anyone."
   );
-
 };

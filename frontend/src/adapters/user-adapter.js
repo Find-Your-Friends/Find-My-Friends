@@ -45,6 +45,7 @@ export const updateAdditionalInformation = async ({
   personality_type,
   gender_preference,
   ice_breaker_question,
+  a_secret,
 }) =>
   fetchHandler(
     `${baseUrl}/${id}`,
@@ -61,6 +62,7 @@ export const updateAdditionalInformation = async ({
       personality_type,
       gender_preference,
       ice_breaker_question,
+      a_secret,
     })
   );
 

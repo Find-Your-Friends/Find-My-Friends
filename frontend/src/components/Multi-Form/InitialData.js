@@ -61,23 +61,22 @@
 // }
 
 const initialData = {
-
     basicInfo: {
         age: "",
         gender: "",
         location: ""
     },
 
-    defaultPrefernces: {
+    defaultPreferences: {
         preferredGroupSize: "", // Small, Medium, Large
-        frequencyOfSocialising: "", // Only holidays ,few times a month, few times a week, always available
+        frequencyOfSocialising: "", // Only holidays , few times a month, few times a week, always available
         personalityType: "", // Introverted, Ambivert, Extroverted
         eventGenderPreference: "" // Male, Female, Mix
     },
 
     theLittleThings: {
         expectation: "",
-        hobbies: [],
+        hobbies: "",
         aSecret: "",
         iceBreaker: ""
     }

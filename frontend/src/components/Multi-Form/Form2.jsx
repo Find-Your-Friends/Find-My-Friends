@@ -88,7 +88,7 @@
 // }
 
 /*
-    defaultPrefernces: {
+    defaultPreferences: {
         frequencyOfSocialising: "", // Only holidays ,few times a month, few times a week, always available
         personalityType: "", // Introverted, Ambivert, Extroverted
         eventGenderPreference: "" // Male, Female, Mix
@@ -113,8 +113,8 @@ export default function Form2({ formData, setFormData }) {
       const { name, value} = event.target
       setFormData((prevFormData) => ({
         ...prevFormData,
-        defaultPrefernces: {
-          ...prevFormData.defaultPrefernces,
+        defaultPreferences: {
+          ...prevFormData.defaultPreferences,
           [name] :value
         },
       }));
@@ -142,21 +142,21 @@ export default function Form2({ formData, setFormData }) {
             name="preferredGroupSize"
             label="Small"
             value="Small"
-            checked={formData.defaultPrefernces.preferredGroupSize === "Small"}
+            checked={formData.defaultPreferences.preferredGroupSize === "Small"}
             onChange={handleChange}
           />
       <Radio
             name="preferredGroupSize"
             label="Medium"
             value="Medium"
-            checked={formData.defaultPrefernces.preferredGroupSize === "Medium"}
+            checked={formData.defaultPreferences.preferredGroupSize === "Medium"}
             onChange={handleChange}
           />
       <Radio
             name="preferredGroupSize"
             label="Large"
             value="Large"
-            checked={formData.defaultPrefernces.preferredGroupSize === "Large"}
+            checked={formData.defaultPreferences.preferredGroupSize === "Large"}
             onChange={handleChange}
           />
       </MenuList>
@@ -181,28 +181,28 @@ export default function Form2({ formData, setFormData }) {
             name="frequencyOfSocialising"
             label="Only holidays"
             value="Only holidays"
-            checked={formData.defaultPrefernces.frequencyOfSocialising === "Only holidays"}
+            checked={formData.defaultPreferences.frequencyOfSocialising === "Only holidays"}
             onChange={handleChange}
           />
       <Radio
             name="frequencyOfSocialising"
             label="few times a month"
             value="few times a month"
-            checked={formData.defaultPrefernces.frequencyOfSocialising === "few times a month"}
+            checked={formData.defaultPreferences.frequencyOfSocialising === "few times a month"}
             onChange={handleChange}
           />
       <Radio
             name="frequencyOfSocialising"
             label="few times a week"
             value="few times a week"
-            checked={formData.defaultPrefernces.frequencyOfSocialising === "few times a week"}
+            checked={formData.defaultPreferences.frequencyOfSocialising === "few times a week"}
             onChange={handleChange}
           />
       <Radio
             name="frequencyOfSocialising"
             label="Always Available"
             value="Always Available"
-            checked={formData.defaultPrefernces.frequencyOfSocialising === "Always Available"}
+            checked={formData.defaultPreferences.frequencyOfSocialising === "Always Available"}
             onChange={handleChange}
           />
       </MenuList>
@@ -227,7 +227,7 @@ export default function Form2({ formData, setFormData }) {
             name="personalityType"
             label="Introverted"
             value="Introverted"
-            checked={formData.defaultPrefernces.personalityType === "Introverted"}
+            checked={formData.defaultPreferences.personalityType === "Introverted"}
             onChange={handleChange}
             // Introverted, Ambivert, Extroverted
           />
@@ -235,14 +235,14 @@ export default function Form2({ formData, setFormData }) {
             name="personalityType"
             label="Ambivert"
             value="Ambivert"
-            checked={formData.defaultPrefernces.personalityType === "Ambivert"}
+            checked={formData.defaultPreferences.personalityType === "Ambivert"}
             onChange={handleChange}
           />
       <Radio
             name="personalityType"
             label="Extroverted"
             value="Extroverted"
-            checked={formData.defaultPrefernces.personalityType === "Extroverted"}
+            checked={formData.defaultPreferences.personalityType === "Extroverted"}
             onChange={handleChange}
           />
       </MenuList>
@@ -268,21 +268,21 @@ export default function Form2({ formData, setFormData }) {
             name="eventGenderPreference"
             label="Males Only"
             value="Males Only"
-            checked={formData.defaultPrefernces.eventGenderPreference === "Males Only"}
+            checked={formData.defaultPreferences.eventGenderPreference === "Males Only"}
             onChange={handleChange}
           />
       <Radio
             name="eventGenderPreference"
             label="Females Only"
             value="Females Only"
-            checked={formData.defaultPrefernces.eventGenderPreference === "Females Only"}
+            checked={formData.defaultPreferences.eventGenderPreference === "Females Only"}
             onChange={handleChange}
           />
       <Radio
             name="eventGenderPreference"
             label="Mixed Gender"
             value="Mixed Gender"
-            checked={formData.defaultPrefernces.eventGenderPreference === "Mixed Gender"}
+            checked={formData.defaultPreferences.eventGenderPreference === "Mixed Gender"}
             onChange={handleChange}
           />
       </MenuList>

@@ -25,6 +25,7 @@ class User {
     personality_type,
     gender_preference,
     ice_breaker_question,
+    a_secret,
   }) {
     this.id = id;
     this.username = username;
@@ -42,6 +43,7 @@ class User {
     this.gender_preference = gender_preference;
     this.personality_type = personality_type;
     this.ice_breaker_question = ice_breaker_question;
+    this.a_secret = a_secret;
   }
 
   // This instance method takes in a plain-text password and returns true if it matches
@@ -85,7 +87,8 @@ class User {
     frequency_of_socialising = null,
     personality_type = null,
     gender_preference = null,
-    ice_breaker_question = null
+    ice_breaker_question = null,
+    a_secret = "tell me A secret"
   ) {
     console.log("Parameters:", {
       username,
@@ -96,6 +99,14 @@ class User {
       gender,
       location,
       profile_pic,
+      expectation,
+      hobbies,
+      preferred_group_size,
+      frequency_of_socialising,
+      personality_type,
+      gender_preference,
+      ice_breaker_question,
+      a_secret
     });
 
     // Ensure all required parameters are provided
@@ -113,8 +124,8 @@ class User {
       preferred_group_size,
       frequency_of_socialising,
       personality_type,
-      gender_preference, ice_breaker_question)
-      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`;
+      gender_preference, ice_breaker_question, a_secret)
+      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       username,
       passwordHash,
@@ -131,6 +142,7 @@ class User {
       personality_type,
       gender_preference,
       ice_breaker_question,
+      a_secret,
     ]);
 
     if (rows.length === 0) {
@@ -165,7 +177,8 @@ class User {
     frequency_of_socialising,
     personality_type,
     gender_preference,
-    ice_breaker_question
+    ice_breaker_question,
+    a_secret
   ) {
     console.log("Params", {
       id,
@@ -179,12 +192,13 @@ class User {
       personality_type,
       gender_preference,
       ice_breaker_question,
+      a_secret,
     });
     // dynamic queries are easier if you add more properties
     const query = `
       UPDATE users
       SET age = ?, gender = ?, location = ?, expectation = ?, hobbies = ?, preferred_group_size = ?, frequency_of_socialising = ?,
-      personality_type = ?, gender_preference = ?, ice_breaker_question = ?
+      personality_type = ?, gender_preference = ?, ice_breaker_question = ?,  a_secret = ?
       WHERE id=?
       RETURNING *
     `;
@@ -199,6 +213,7 @@ class User {
       personality_type,
       gender_preference,
       ice_breaker_question,
+      a_secret,
       id,
     ]);
     const updatedUser = rows[0];
