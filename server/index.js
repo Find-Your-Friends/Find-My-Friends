@@ -1,12 +1,14 @@
 require("dotenv").config();
 const path = require("path");
 const express = require("express");
+const cron = require("node-cron");
 
 const handleCookieSessions = require("./middleware/handleCookieSessions");
 const logRoutes = require("./middleware/logRoutes");
 
 const authRouter = require("./routers/authRouter");
 const userRouter = require("./routers/userRouter");
+const postControllers = require("./controllers/postControllers");
 
 const app = express();
 
@@ -24,6 +26,15 @@ app.use("/api/users", userRouter);
 app.get("*", (req, res, next) => {
   if (req.originalUrl.startsWith("/api")) return next();
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+});
+
+cron.schedule("* * * * *", async () => {
+  try {
+    console.log("Running active status update task");
+    await postControllers.updateActiveStatus();
+  } catch (error) {
+    console.error("Error running active status update task:", error);
+  }
 });
 
 const port = process.env.PORT || 3000;

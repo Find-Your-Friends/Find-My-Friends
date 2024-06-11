@@ -5,10 +5,12 @@ const User = require("../models/User");
  */
 exports.seed = async (knex) => {
   // Clear the tables
+  await knex("posts").del();
   await knex("users").del();
 
   // Reset the ID sequences
   await knex.raw("ALTER SEQUENCE users_id_seq RESTART WITH 1");
+  await knex.raw("ALTER SEQUENCE posts_id_seq RESTART WITH 1");
 
   // Create users
   const user1 = await User.create(
@@ -67,4 +69,50 @@ exports.seed = async (knex) => {
     "Creative, Empathetic",
     "I once accidentally crashed my neighbor's car and never told anyone."
   );
+
+  const users = await knex("users").select("id", "username");
+
+  await knex('posts').insert([
+    {
+      user_id: users.find(user => user.username === "cool_cat").id,
+      picture: "https://example.com/photo1.jpg",
+      username: "cool_cat",
+      location: "Central Park, NYC",
+      time: "12:00:00",
+      date: "2024-06-11",
+      group_size: 3,
+      title: "Picnic in the Park",
+      description: "Join me for a fun picnic in Central Park. Bring your own snacks!",
+      gender_preference: "Any",
+      active: true,
+    },
+    {
+      user_id: users.find(user => user.username === "l33t-guy").id,
+      picture: "https://example.com/photo2.jpg",
+      username: "l33t-guy",
+      location: "Tech Hub, SLC",
+      time: "18:00:00",
+      date: "2024-06-12",
+      group_size: 5,
+      title: "Coding Workshop",
+      description: "Come join our coding workshop for beginners. Laptops provided.",
+      gender_preference: "Any",
+      active: true,
+    },
+    {
+      user_id: users.find(user => user.username === "wowow").id,
+      picture: "https://example.com/photo3.jpg",
+      username: "wowow",
+      location: "City Square, Portland",
+      time: "14:00:00",
+      date: "2024-06-13",
+      group_size: 10,
+      title: "Film Making Meetup",
+      description: "A meetup for aspiring filmmakers. Let's share ideas and collaborate!",
+      gender_preference: "Female",
+      active: true,
+    }
+  ]);
+
+  
 };
