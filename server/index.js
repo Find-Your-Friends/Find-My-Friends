@@ -27,14 +27,6 @@ app.get("*", (req, res, next) => {
   if (req.originalUrl.startsWith("/api")) return next();
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
-<<<<<<< HEAD
-// app.get("*", (req, res) => {
-//   if (req.originalUrl.startsWith("/api")) {
-//     return res.status(404).send('API route not found');
-//   }
-//   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-// });
-=======
 
 cron.schedule("* * * * *", async () => {
   try {
@@ -45,7 +37,6 @@ cron.schedule("* * * * *", async () => {
   }
 });
 
->>>>>>> 046cc284bb248a3b930a3eabf9e42f0fb64548f9
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
