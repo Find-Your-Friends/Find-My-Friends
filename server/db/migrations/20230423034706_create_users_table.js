@@ -13,8 +13,8 @@ exports.up = (knex) => {
     table.string("gender");
     table.string("location");
     table.string("profile_pic");
-    table.string("expectation");
-    table.string("hobbies");
+    table.jsonb("expectation");
+    table.jsonb("hobbies");
     table.string("preferred_group_size");
     table.string("frequency_of_socialising");
     table.string("personality_type");

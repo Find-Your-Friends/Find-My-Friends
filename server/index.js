@@ -25,8 +25,20 @@ app.get("*", (req, res, next) => {
   if (req.originalUrl.startsWith("/api")) return next();
   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
 });
-
+// app.get("*", (req, res) => {
+//   if (req.originalUrl.startsWith("/api")) {
+//     return res.status(404).send('API route not found');
+//   }
+//   res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
+// });
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}/`);
 });
+// app.get("/*", function (req, res) {
+//   res.sendFile(path.join(__dirname, "dist/index.html"), function (err) {
+//     if (err) {
+//       res.status(500).send(err);
+//     }
+//   });
+// });

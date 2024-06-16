@@ -171,6 +171,8 @@ export default function PersonalInfo() {
     prevStep,
   } = useStepNavigator(steps);
 
+  // if (currentUser) return <Navigate to="/" />;
+
    async function handleSubmit(event) {
     event.preventDefault();
     if (!isLastStep) {

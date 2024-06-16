@@ -106,7 +106,7 @@ class User {
       personality_type,
       gender_preference,
       ice_breaker_question,
-      a_secret
+      a_secret,
     });
 
     // Ensure all required parameters are provided
@@ -194,6 +194,13 @@ class User {
       ice_breaker_question,
       a_secret,
     });
+
+    // Default expectation to an empty array or string if it's undefined
+    // expectation = expectation !== undefined ? JSON.stringify(expectation) : "[]";
+    // if (typeof expectation === "string") {
+    //   expectation = JSON.parse(expectation);
+    // }
+
     // dynamic queries are easier if you add more properties
     const query = `
       UPDATE users
@@ -206,8 +213,8 @@ class User {
       age,
       gender,
       location,
-      expectation,
-      hobbies,
+      JSON.stringify(expectation),
+      JSON.stringify(hobbies),
       preferred_group_size,
       frequency_of_socialising,
       personality_type,
