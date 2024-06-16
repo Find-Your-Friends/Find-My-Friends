@@ -1,23 +1,24 @@
 const express = require("express");
 const userControllers = require("../controllers/userControllers");
+const postControllers = require("../controllers/postControllers");
 const checkAuthentication = require("../middleware/checkAuthentication");
+
 const userRouter = express.Router();
 
-//additional-info routes
-
+// User routes
 userRouter.post("/", userControllers.createUser);
-
-// These actions require users to be logged in (authentication)
-// Express lets us pass a piece of middleware to run for a specific endpoint
 userRouter.get("/", checkAuthentication, userControllers.listUsers);
 userRouter.get("/:id", checkAuthentication, userControllers.showUser);
 userRouter.patch(
   "/:id",
-
+  checkAuthentication,
   userControllers.updateUserAdditionalInfo
 );
-// userRouter.patch('/:id', checkAuthentication, userControllers.updateUser);
+
+// Post routes
+userRouter.post("/:id/posts", postControllers.createPost);
+userRouter.delete("/posts/:postId", postControllers.deletePost);
+
+
 
 module.exports = userRouter;
-
-// updateAdditionalInfomation
