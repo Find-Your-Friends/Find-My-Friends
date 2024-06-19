@@ -5,8 +5,8 @@ import CurrentUserContext from "../contexts/current-user-context";
 export default function SiteHeadingAndNav() {
   const { currentUser } = useContext(CurrentUserContext);
 
-  return 
-  <header>
+  return (
+    <header>
     <a id='logo' href='/'>React/Express Auth</a>
     <nav>
       <ul>
@@ -25,5 +25,6 @@ export default function SiteHeadingAndNav() {
         }
       </ul>
     </nav>
-  </header>;
+  </header>
+  );
 }

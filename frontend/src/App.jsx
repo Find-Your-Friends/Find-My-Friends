@@ -12,6 +12,8 @@ import UserPage from './pages/User';
 import { AdditionalInfo } from './components/Additional-Info';
 import PersonalInfo from './components/PersonalInfo';
 import LandingPage from './pages/Landing';
+import ProtectedRoute from './components/ProtectedRoute';
+import CurrentUserContextProvider from './contexts/CurrentUserContextProvider';
 // import AboutPage from './pages/LearnMore';
 
 export default function App() {
@@ -21,12 +23,31 @@ export default function App() {
   }, [setCurrentUser]);
 
   return <>
-    <SiteHeadingAndNav />
+      {/* <SiteHeadingAndNav /> */}
+      <CurrentUserContextProvider>
+      <main>
+        <Routes>
+        <Route path="/additional-info" element={<AdditionalInfo />} />
+          <Route path='/' element={<ProtectedRoute element={Home} />} />
+          <Route path="/landing-page" element={<LandingPage />} />
+          <Route path="/additional-info" element={<ProtectedRoute element={AdditionalInfo} />} />
+          <Route path="/personal-info" element={<ProtectedRoute element={PersonalInfo} />} />
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/sign-up' element={<SignUpPage />} />
+          <Route path='/users' element={<ProtectedRoute element={UsersPage} />} />
+          <Route path='/users/:id' element={<ProtectedRoute element={UserPage} />} />
+          <Route path='*' element={<NotFoundPage />} />
+        </Routes>
+      </main>
+      </CurrentUserContextProvider>
+  </>;
+}
+
+   {/* <SiteHeadingAndNav />
     <main>
       <Routes basename = ''>
-        <Route path='/' element={<Home />} />
+        <Route path='/' element={<ProtectedRoute element={Home} />} />
         <Route path="/landing-page" element={<LandingPage />} />
-        <Route path="/additional-info" element={<AdditionalInfo />} />
         <Route path="/personal-info" element={<PersonalInfo />} />
         <Route path='/login' element={<LoginPage />} />
         <Route path='/sign-up' element={<SignUpPage />} />
@@ -34,6 +55,4 @@ export default function App() {
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>
-    </main>
-  </>;
-}
+    </main> */}

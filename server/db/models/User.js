@@ -117,7 +117,9 @@ class User {
     // Hash the plain-text password using bcrypt before storing it in the database
     const passwordHash = await authUtils.hashPassword(password);
 
-    // full_name = full_name === "" ? null : full_name;
+    // Convert expectation and hobbies to JSON strings
+    const expectationJson = JSON.stringify(expectation);
+    const hobbiesJson = JSON.stringify(hobbies ? hobbies.split(',').map(hobby => hobby.trim()) : []);
 
     const query = `INSERT INTO users (username, password_hash, email, full_name, age, gender, location, profile_pic, expectation,
       hobbies,
@@ -135,8 +137,8 @@ class User {
       gender,
       location,
       profile_pic,
-      expectation,
-      hobbies,
+      expectationJson,
+      hobbiesJson,
       preferred_group_size,
       frequency_of_socialising,
       personality_type,
@@ -152,6 +154,7 @@ class User {
     const user = rows[0];
     return new User(user);
   }
+
   // this is an instance method that we can use to update
   static async update(id, username) {
     // dynamic queries are easier if you add more properties
@@ -195,11 +198,9 @@ class User {
       a_secret,
     });
 
-    // Default expectation to an empty array or string if it's undefined
-    // expectation = expectation !== undefined ? JSON.stringify(expectation) : "[]";
-    // if (typeof expectation === "string") {
-    //   expectation = JSON.parse(expectation);
-    // }
+    // Convert expectation and hobbies to JSON strings
+    const expectationJson = JSON.stringify(expectation);
+    const hobbiesJson = JSON.stringify(hobbies);
 
     // dynamic queries are easier if you add more properties
     const query = `
@@ -213,8 +214,8 @@ class User {
       age,
       gender,
       location,
-      JSON.stringify(expectation),
-      JSON.stringify(hobbies),
+      expectationJson,
+      hobbiesJson,
       preferred_group_size,
       frequency_of_socialising,
       personality_type,
