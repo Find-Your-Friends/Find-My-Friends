@@ -22,7 +22,8 @@ export default function LoginPage() {
     navigate(`/users/${user.id}`);
   };
 
-  if (currentUser) return <Navigate to="/" />;
+  // if (currentUser) return <Navigate to="/" />;
+  if (currentUser) return <Navigate to={`/users/${currentUser.id}` }/>
 
   return (
     <div className="flex flex-col lg:flex-row min-h-screen bg-background">

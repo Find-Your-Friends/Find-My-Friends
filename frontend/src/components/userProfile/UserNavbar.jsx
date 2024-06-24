@@ -57,10 +57,11 @@
 
 
 import React from 'react';
-import { ChevronDownIcon, BellIcon, Bars3Icon } from '@heroicons/react/24/outline';
+import { ChevronDownIcon, BellIcon, Bars3Icon, InboxIcon, PlusIcon} from '@heroicons/react/24/outline';
 import { Avatar, Menu, MenuHandler, MenuList, MenuItem, Button, Input } from "@material-tailwind/react";
+import { useNavigate, useParams, Navigate, Link } from "react-router-dom";
 
-export default function UserNavbar({ toggleSidebar }) {
+export default function UserNavbar({ toggleSidebar, handleLogout }) {
   return (
     <div className="bg-white border-b border-gray-200">
       <div className="container mx-auto px-4 py-2 flex items-center justify-between">
@@ -69,14 +70,17 @@ export default function UserNavbar({ toggleSidebar }) {
             <Bars3Icon className="h-6 w-6 text-gray-500" />
           </button>
           <img src="https://www.redditstatic.com/desktop2x/img/favicon/favicon-32x32.png" alt="Reddit Logo" className="h-8 w-8 hidden md:block"/>
-          {/* <Input 
-            type="text" 
-            placeholder="Search in r/cscareerquestions" 
-            className="border rounded-full px-4 py-1 text-sm hidden md:block"
-          /> */}
         </div>
+        {/* <Input 
+          type="text" 
+          placeholder="Search in r/cscareerquestions" 
+          className="border rounded-full px-4 py-1 text-sm hidden md:block"
+        /> */}
         <div className="flex items-center space-x-4">
           <BellIcon className="h-6 w-6 text-gray-500" />
+          <Link to="/Post">
+            <PlusIcon className="h-6 w-6 text-gray-500" />
+          </Link>
           <Menu>
             <MenuHandler>
               <Button
@@ -102,7 +106,7 @@ export default function UserNavbar({ toggleSidebar }) {
               <MenuItem>Edit Profile</MenuItem>
               <MenuItem>Inbox</MenuItem>
               <MenuItem>Help</MenuItem>
-              <MenuItem className="text-red-500">Sign Out</MenuItem>
+              <MenuItem className="text-red-500" onClick={handleLogout}>Sign Out</MenuItem>
             </MenuList>
           </Menu>
         </div>
