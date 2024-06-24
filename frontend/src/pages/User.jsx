@@ -120,11 +120,11 @@
 // }
 ///////////////
 import React, { useContext, useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Navigate, Link } from "react-router-dom";
 import CurrentUserContext from "../contexts/current-user-context";
 import { getUser } from "../adapters/user-adapter";
 import { logUserOut } from "../adapters/auth-adapter";
-import UserSidebar from "../components/Multi-Form/userSidebar";
+// import UserSidebar from "../components/Multi-Form/userSidebar";
 import UserNavbar from "../components/userProfile/userNavbar";
 
 export default function UserPage() {
@@ -135,6 +135,7 @@ export default function UserPage() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { id } = useParams();
   const isCurrentUserProfile = currentUser && currentUser.id === Number(id);
+    // if (currentUser) return <Navigate to={`/users/${currentUser.id}` }/>
 
   useEffect(() => {
     const loadUser = async () => {
@@ -149,7 +150,7 @@ export default function UserPage() {
   const handleLogout = async () => {
     logUserOut();
     setCurrentUser(null);
-    navigate('/');
+    navigate('/login');
   };
 
   const toggleSidebar = () => {
@@ -163,9 +164,9 @@ export default function UserPage() {
 
   return (
     <div>
-      <UserNavbar toggleSidebar={toggleSidebar} />
+      <UserNavbar toggleSidebar={toggleSidebar} handleLogout={handleLogout} />
       <div className="min-h-screen bg-gray-100 flex">
-        <UserSidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+        {/* <UserSidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} /> */}
         <div className="flex-1 flex flex-col md:ml-64">
           <main className="p-4 flex-1">
             {/* Main content goes here */}

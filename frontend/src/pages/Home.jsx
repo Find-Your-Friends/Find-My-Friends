@@ -5,8 +5,9 @@ import UploadImage from "../components/ProfilePic";
 
 export default function HomePage() {
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
-
-  if (!currentUser) return <Navigate to="/landing" />;
+console.log(currentUser)
+  // if (currentUser) return <Navigate to={`/users/${currentUser.id}` }/>
+  if (!currentUser) return <Navigate to="/login" />;
   return (
     <div>
       <h1>This is the home / main page</h1>
