@@ -16,6 +16,7 @@ userRouter.patch(
 );
 
 // Post routes
+userRouter.get("/posts", postControllers.listAllPost)
 userRouter.post("/:id/posts", postControllers.createPost);
 userRouter.delete("/posts/:postId", postControllers.deletePost);
 

@@ -69,3 +69,9 @@ exports.deletePost = async (req, res) => {
     res.status(500).json({ error: "Failed to delete post" });
   }
 };
+
+exports.listAllPost = async(req, res) => {
+  const posts = await Post.listAllPost
+  res.send(posts)
+
+}
